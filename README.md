@@ -195,3 +195,11 @@ ORDER BY YEAR;"
 view sqlQuery(conn, query)
 view
 
+# Solution 13
+
+query <- "SELECT DATE, CROP_TYPE, PRICE_PRERMT AS US DOLLARS, PRICE_PRERMT*FXUSDCAD AS CANADIAN DOLLARS FROM CROP_DATA, MONTHLY_PRICES 
+WHERE CROP_DATA.DATE=MONTHLY_PRICES.DATE
+and CROP_TYPE = "canola" and GEO = "Saskatchewan"
+ORDER BY YEAR;"
+view sqlQuery(conn, query)
+view
