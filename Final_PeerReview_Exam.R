@@ -112,12 +112,16 @@ tab.frame$CROP_DATA$FARM_PRICES$DAILY_FX$MONTHLY_FX
 
 crop_datadf <- read.csv("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud
 /IBM-RP0203EN-SkillsNetwork/labs/Final%20Project/Annual_Crop_Data.csv", header = FALSE)
+head(crop_datadf)
 farm_pricesdf <- read.csv("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud
 /IBM-RP0203EN-SkillsNetwork/labs/Final%20Project/Monthly_Farm_Prices.csv", header = FALSE)
+head(farm_pricesdf)
 daily_fxdf <- read.csv("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud
 /IBM-RP0203EN-SkillsNetwork/labs/Final%20Project/Daily_FX.csv", header = FALSE)
+head(daily_fxdf)
 monthly_fxdf <- read.csv("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud
 /IBM-RP0203EN-SkillsNetwork/labs/Final%20Project/Monthly_FX.csv", header = FALSE)
+head(monthly_fxdf)
 
 sqlSave(conn, crop_datadf, "CROP_DATA", append=TRUE, fast=FALSE, rownames=FALSE, colnames=FALSE, verbose=FALSE)
 sqlSave(conn, farm_pricesdf, "FARM_PRICES", append=TRUE, fast=FALSE, rownames=FALSE, colnames=FALSE, verbose=FALSE)
@@ -132,7 +136,7 @@ view
 
 # Solution 4
 
-query <- "SELECT DISCTINCT(GEO) FROM FARM_PRICES;"
+query <- "SELECT DISCTINCT GEO FROM FARM_PRICES;"
 view sqlQuery(conn, query)
 view
 
@@ -150,7 +154,7 @@ view
 
 # Solution 7
 
-query <- "SELECT DICTINCT (GEO), CROP_TYPE FROM CROP_DATA WHERE CROP_TYPE = "BARLEY";"
+query <- "SELECT DICTINCT GEO, CROP_TYPE FROM CROP_DATA WHERE CROP_TYPE = "BARLEY";"
 view sqlQuery(conn, query)
 view
 
@@ -166,7 +170,7 @@ view
 
 # Solution 9
 
-query <- "SELECT DISTINCT (CROP_TYPE), PRICE_PRERMT FROM FARM_PRICES WHERE PRICE_PRERMT >= 350;"
+query <- "SELECT DISTINCT CROP_TYPE, PRICE_PRERMT FROM FARM_PRICES WHERE PRICE_PRERMT >= "350;"
 view sqlQuery(conn, query)
 view
 
@@ -200,6 +204,7 @@ view
 query <- "SELECT DATE, CROP_TYPE, PRICE_PRERMT AS US DOLLARS, PRICE_PRERMT*FXUSDCAD AS CANADIAN DOLLARS FROM CROP_DATA, MONTHLY_PRICES 
 WHERE CROP_DATA.DATE=MONTHLY_PRICES.DATE
 and CROP_TYPE = "canola" and GEO = "Saskatchewan"
-ORDER BY YEAR;"
+ORDER BY YEAR
+;"
 view sqlQuery(conn, query)
 view
