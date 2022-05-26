@@ -1,4 +1,5 @@
 # Final-Assignment-IBM
+library(RODBC)
 
 # Establish database connection
 dsn_driver <- "{IBM DB2 ODBC Driver}"
